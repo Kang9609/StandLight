@@ -2,23 +2,19 @@
 #define CONTROLLER_H
 
 #pragma once
-
-#include <string>
-#include "Led.h"
-
-
-enum {LIGHT_OFF, LIGHT_ON};
+#include "View.h"
+#include "string"
 
 class Controller
 {
 private:
     int lightState;
-    Led *light;
+    View *view;
 
 public:
-    Controller(Led *led);        // Controller를 생성할 때 Led를 불러온다
+    Controller(View *viewer);
     virtual ~Controller();
-    void updateEvent(std::string strBtn); 
+    void updateEvent(std::string strBtn);   // 어떤 버튼이 눌렸는지 문자열로
 };
 
 #endif

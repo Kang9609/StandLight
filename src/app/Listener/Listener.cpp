@@ -9,15 +9,15 @@ Listener::Listener(Button *button, Controller *control)    // *~ = 포인터 = �
 }
 
 
+Listener::~Listener()
+{
+
+}
+
 void Listener::checkEvent()     // 콜론(:) = 소속
 {
     if (powerButton->getState() == RELEASE_ACTIVE)    // LIstener가 Button을 call 하고 있다 = Listener가 Button에 의존적이다
         {
             controller->updateEvent("powerButton");
         }
-}
-
-Listener::~Listener()
-{
-
 }

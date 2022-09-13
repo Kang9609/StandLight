@@ -1,31 +1,31 @@
 #include <iostream>
 #include <wiringPi.h>
 #include "Button.h"
-#include "Led.h"
 #include "Listener.h"
 #include "Controller.h"
+#include "View.h"
+#include "Led.h"
 
-
-int main()
+int main(void)
 {
-    std::cout << "Hello World!" << std::endl;
-
-    Button button1(27);     // 27번 버튼에 의미부여 
-    Led led1(25);              // => class 정의 후에는
-    Controller control(&led1);
-    Listener listener(&button1, &control);   // &button1 = button1(27), &led1 = led1(25)  => 생성자를 부를 때 같이 들어간다
-                                          // listener = 객체에 포함되어 있는 매체를 부르는 것 (L => l)
+    std::cout << "Stand Light" << std::endl;
     
+    Button button1(27);
+    Led led1(21);
+    Led led2(22);
+    Led led3(23);
+    Led led4(24);
+    Led led5(25);
+    View view(&led1, &led2, &led3, &led4, &led5);
+    Controller control(&view);
+    Listener listener(&button1, &control);
 
-
-    while (1)    
+    while (1)
     {
         listener.checkEvent();
+        view.lightView();
         delay(50);
-
     }
 
     return 0;
 }
-
-

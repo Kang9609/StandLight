@@ -1,9 +1,9 @@
 #include "Controller.h"
 
-Controller::Controller(Led *Led)
+Controller::Controller(View *viewer)
 {
-    light = Led;      // 불러온 Led를 light라 하겠다
-    lightState = LIGHT_OFF;   // 처음에는 초기화 (OFF) = 초기값이 OFF 상태
+    view = viewer;
+    lightState = LIGHT_OFF;
 }
 
 Controller::~Controller()
@@ -13,21 +13,44 @@ Controller::~Controller()
 
 void Controller::updateEvent(std::string strBtn)
 {
-    switch (lightState) 
+    switch (lightState)
     {
-        case LIGHT_OFF:
-            if (strBtn == "powerButton")
-            {
-                lightState = LIGHT_ON;  // event(Button 입력)이 들어오면 상태를 on으로 바꾼다
-                light->On();
-            }
-            break;
-        case LIGHT_ON:
-            if (strBtn == "powerButton")
-            {
-                lightState = LIGHT_OFF;
-                light->Off();
-            }
-            break;
+    case LIGHT_OFF:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_ON1;
+            view->updataState("StateOn1");
+        }
+        break;
+
+    case LIGHT_ON1:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_ON2;
+            view->updataState("StateOn2");
+        }
+        break;
+    case LIGHT_ON2:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_ON3;
+            view->updataState("StateOn3");
+        }
+        break;
+    case LIGHT_ON3:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_ON4;
+            view->updataState("StateOn4");
+        }
+        break;
+    case LIGHT_ON4:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_ON5;
+            view->updataState("StateOn5");
+        }
+        break;
+    case LIGHT_ON5:
+        if (strBtn == "powerButton") {
+            lightState = LIGHT_OFF;
+            view->updataState("StateOff");
+        }
+        break;
     }
 }
